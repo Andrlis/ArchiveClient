@@ -51,12 +51,12 @@ public class UserDAO {
 		List<User> userList = new LinkedList<User>();
 		try {
 			Statement statement = connection.createStatement();
-			ResultSet resultSet = statement.executeQuery("SELECT * FROM catalog.user");
+			ResultSet resultSet = statement.executeQuery("SELECT * FROM archive.users");
 
 			User user = null;
 			while (resultSet.next()) {
 				user = new User();
-				user.setId(Integer.parseInt(resultSet.getString("id")));
+				user.setId(Integer.parseInt(resultSet.getString("user_id")));
 				user.setAdmin(Boolean.parseBoolean(resultSet.getString("admin")));
 				user.setUsername(resultSet.getString("login"));
 				user.setPassword(resultSet.getString("password"));
@@ -76,10 +76,10 @@ public class UserDAO {
 		User user = null;
 		try {
 			Statement statement = connection.createStatement();
-			ResultSet resultSet = statement.executeQuery("SELECT * FROM catalog.user where login = '"+login+"'");
+			ResultSet resultSet = statement.executeQuery("SELECT * FROM archive.users where login = '"+login+"'");
 			while (resultSet.next()) {
 				user = new User();
-				user.setId(Integer.parseInt(resultSet.getString("id")));
+				user.setId(Integer.parseInt(resultSet.getString("user_id")));
 				user.setAdmin(Boolean.parseBoolean(resultSet.getString("admin")));
 				user.setUsername(resultSet.getString("login"));
 				user.setPassword(resultSet.getString("password"));

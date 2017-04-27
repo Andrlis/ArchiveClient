@@ -63,28 +63,23 @@ public class Client {
 		}
 	}
 
-	public void sendRequest(Request request) {
-		Request answer;
+	public Request sendRequest(Request request) {
+		Request answer = null;
 		try {
-			while (true) {
-				if (request.requestType == null)
-					break;
+			if (request.requestType != null) {
 
 				objOutputStream.writeObject(request);
 
 				answer = (Request) objInputStream.readObject();
 
-				if (answer.requestType.equals("exit"))
-					break;
-
-				System.out.println("Server answer: type " + request.requestType 
-						+ " message: " + request.requestMessage);		
+				System.out.println("Server answer: type " + answer.requestType + " message: " + answer.requestMessage);
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
+		return answer;
 	}
 
 	public void endWork() {
